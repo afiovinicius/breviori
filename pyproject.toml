@@ -70,6 +70,8 @@ run = 'uvicorn app.main:app --reload'
 [tool.poetry]
 packages = [{include = "app", from = "src"}]
 
+include = ["src/app"]
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
