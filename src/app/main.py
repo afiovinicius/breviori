@@ -22,8 +22,8 @@ from app.models.short import Links
 
 _ = load_dotenv(find_dotenv())
 
-dir = os.path.dirname(os.path.abspath(__file__))
-templates = templating.Jinja2Templates(directory=str(os.path.join(dir, "templates")))
+dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", "app")
+templates = templating.Jinja2Templates(directory=os.path.join(dir, "templates"))
 
 
 @asynccontextmanager
