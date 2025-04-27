@@ -1,8 +1,8 @@
 import secrets
 from datetime import datetime, timezone, timedelta
 from sqlalchemy import Column, DateTime, Integer, String
-from app.core.config import settings
-from app.core.database import Base
+from src.app.core.config import settings
+from src.app.core.database import Base
 
 
 class Links(Base):

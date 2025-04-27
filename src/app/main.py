@@ -14,10 +14,10 @@ from dotenv import find_dotenv, load_dotenv
 from sqlalchemy.orm import Session
 from strawberry.fastapi import GraphQLRouter
 from contextlib import asynccontextmanager
-from app.core.database import get_db
-from app.api.libs.scheduler import start_scheduler, scheduler
-from app.api.schema import schema
-from app.models.short import Links
+from src.app.core.database import get_db
+from src.app.api.libs.scheduler import start_scheduler, scheduler
+from src.app.api.schema import schema
+from src.app.models.short import Links
 
 
 _ = load_dotenv(find_dotenv())
@@ -111,7 +111,7 @@ async def home(short: str, db: Session = Depends(get_db)):
         )
 
 
-# if __name__ == "__main__":
-#     import uvicorn
+if __name__ == "__main__":
+    import uvicorn
 
-#     uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
