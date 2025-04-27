@@ -1,8 +1,8 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from contextlib import contextmanager
 from datetime import datetime, timezone
-from src.app.core.database import SessionLocal
-from src.app.models.short import Links
+from app.core.database import SessionLocal
+from app.models.short import Links
 
 scheduler = AsyncIOScheduler()
 

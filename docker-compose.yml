@@ -1,17 +1,4 @@
 services:
-  postgres:
-    image: postgres:latest
-    env_file:
-      - .env
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "5430:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   app:
     image: breviori_app
     build:
@@ -27,6 +14,19 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - postgres
+
+  postgres:
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5430:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:

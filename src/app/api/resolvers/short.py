@@ -1,8 +1,8 @@
 import strawberry
 from fastapi import HTTPException, status
-from src.app.core.database import get_db
-from src.app.models.short import Links
-from src.app.api.types.short import ShortGenerate, ShortLink, ShortDB
+from app.core.database import get_db
+from app.models.short import Links
+from app.api.types.short import ShortGenerate, ShortLink, ShortDB
 
 
 @strawberry.type

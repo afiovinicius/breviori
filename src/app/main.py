@@ -14,10 +14,10 @@ from dotenv import find_dotenv, load_dotenv
 from sqlalchemy.orm import Session
 from strawberry.fastapi import GraphQLRouter
 from contextlib import asynccontextmanager
-from src.app.core.database import get_db
-from src.app.api.libs.scheduler import start_scheduler, scheduler
-from src.app.api.schema import schema
-from src.app.models.short import Links
+from app.core.database import get_db
+from app.api.libs.scheduler import start_scheduler, scheduler
+from app.api.schema import schema
+from app.models.short import Links
 
 
 _ = load_dotenv(find_dotenv())

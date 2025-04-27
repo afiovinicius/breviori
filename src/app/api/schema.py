@@ -1,6 +1,6 @@
 import strawberry
 
-from src.app.api.resolvers.short import (
+from app.api.resolvers.short import (
     Query as ShortQuery,
     Mutation as ShortMutation,
 )
