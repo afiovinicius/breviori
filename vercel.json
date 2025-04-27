@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "poetry install --no-dev -no-interaction --no-ansi",
-  "installCommand": "poetry install --no-dev -no-interaction --no-ansi",
   "builds": [
     {
       "src": "api/index.py",
