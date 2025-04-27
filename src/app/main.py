@@ -22,8 +22,8 @@ from app.models.short import Links
 
 _ = load_dotenv(find_dotenv())
 
-dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", "app")
-templates = templating.Jinja2Templates(directory=os.path.join(dir, "templates"))
+dir_path = os.path.dirname(os.path.abspath(__file__))
+templates = templating.Jinja2Templates(directory=os.path.join(dir_path, "templates"))
 
 
 @asynccontextmanager
@@ -64,7 +64,7 @@ app.add_middleware(
 
 app.mount(
     "/static",
-    staticfiles.StaticFiles(directory=os.path.join(dir, "static")),
+    staticfiles.StaticFiles(directory=os.path.join(dir_path, "static")),
     name="static",
 )
 

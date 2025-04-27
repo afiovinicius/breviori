@@ -2,7 +2,7 @@ FROM python:3.12-slim
 
 ENV POETRY_VIRTUALENVS_CREATE=false
 
-WORKDIR /app
+WORKDIR /breviori
 COPY . .
 
 RUN pip install --no-cache-dir poetry && \
