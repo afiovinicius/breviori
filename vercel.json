@@ -1,0 +1,15 @@
+{
+  "devCommand": "gunicorn -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8080",
+  "builds": [
+    {
+      "src": "app/main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app/main.py"
+    }
+  ]
+}
