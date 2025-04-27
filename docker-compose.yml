@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5430:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    image: breviori_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - ENV=${ENV}
+      - DOMAIN_URL=${DOMAIN_URL}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

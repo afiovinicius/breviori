@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}" />
+    <title>Breviori - Encurtar URL</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Encurtar URL</h1>
+
+      <form id="shorten-form">
+        <input
+          type="url"
+          id="url-input"
+          placeholder="Cole sua URL aqui..."
+          required
+        />
+        <button type="submit" id="submit-btn" disabled>Encurtar</button>
+        <p id="error-message" class="error" style="display: none"></p>
+      </form>
+
+      <div id="result" class="card" style="display: none">
+        <a href="#" id="original-link" class="link" target="_blank"
+          >Link original</a
+        >
+        <a href="#" id="short-link" class="link" target="_blank"
+          >Link encurtado</a
+        >
+        <a href="#" id="whatsapp-link" class="whatsapp-btn" target="_blank">
+          Compartilhar no WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("shorten-form");
+      const input = document.getElementById("url-input");
+      const button = document.getElementById("submit-btn");
+      const errorMessage = document.getElementById("error-message");
+      const resultCard = document.getElementById("result");
+      const originalLink = document.getElementById("original-link");
+      const shortLink = document.getElementById("short-link");
+      const whatsappLink = document.getElementById("whatsapp-link");
+
+      input.addEventListener("input", () => {
+        button.disabled = input.value.trim() === "";
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        button.disabled = true;
+        errorMessage.style.display = "none";
+        resultCard.style.display = "none";
+
+        try {
+          const response = await fetch("/api", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              query: `
+                mutation GenerateShort($req: ShortGenerate!) {
+                  generateShort(req: $req) {
+                    short
+                    shortUrl
+                    originalUrl
+                    accessCount
+                    createdAt
+                    expiredAt
+                    updatedAt
+                  }
+                }
+              `,
+              variables: {
+                req: {
+                  originalUrl: input.value.trim(),
+                },
+              },
+            }),
+          });
+
+          const data = await response.json();
+          if (data.errors) {
+            throw new Error(data.errors[0].message);
+          }
+
+          const linkData = data.data.generateShort;
+
+          originalLink.href = linkData.originalUrl;
+          originalLink.textContent = linkData.originalUrl;
+
+          shortLink.href = linkData.shortUrl;
+          shortLink.textContent = linkData.shortUrl;
+
+          whatsappLink.href = `https://web.whatsapp.com/send?text=${encodeURIComponent(
+            linkData.shortUrl
+          )}`;
+
+          resultCard.style.display = "block";
+          input.value = "";
+        } catch (error) {
+          errorMessage.textContent = error.message;
+          errorMessage.style.display = "block";
+        } finally {
+          button.disabled = input.value.trim() === "";
+        }
+      });
+    </script>
+  </body>
+</html>
