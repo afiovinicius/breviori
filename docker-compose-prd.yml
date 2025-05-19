@@ -12,8 +12,6 @@ services:
       - ENV=${ENV}
       - DOMAIN_URL=${DOMAIN_URL}
       - DATABASE_URL=${DATABASE_URL}
-    depends_on:
-      - postgres
     volumes:
       - .:/breviori
 
