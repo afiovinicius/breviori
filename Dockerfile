@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir poetry && \
     poetry config installer.max-workers 10 && \
     poetry install --no-interaction --no-ansi
 
-EXPOSE 8080
+EXPOSE 8585
 ENTRYPOINT [ "./entrypoint.sh" ]
 
