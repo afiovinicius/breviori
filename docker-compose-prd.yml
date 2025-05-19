@@ -1,0 +1,21 @@
+services:
+  app:
+    image: breviori_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - ENV=${ENV}
+      - DOMAIN_URL=${DOMAIN_URL}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - postgres
+    volumes:
+      - .:/breviori
+
+volumes:
+  breviori:
