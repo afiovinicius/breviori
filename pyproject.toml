@@ -3,7 +3,7 @@ name = "breviori"
 version = "1.0.0"
 readme = "README.md"
 requires-python = "^3.12.0"
-urls = { homepage = "https://apis.vicit.studio" }
+urls = { homepage = "https://breviori.vicit.studio" }
 description = "Web App simples para encurta urls."
 authors = [
     {name = "afiovinicius",email = "afiovinicius@gmail.com"}
